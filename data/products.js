@@ -690,5 +690,3 @@ const product = [
     ]
   }
 ];
-
-//samp
