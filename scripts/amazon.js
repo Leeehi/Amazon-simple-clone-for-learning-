@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, updateCart} from '../data/cart.js';
 import { product } from '../data/products.js';
 
 let productHTML = '';
@@ -58,27 +58,6 @@ product.forEach( (products) => {
 });
 
 document.querySelector('.js-products-grid').innerHTML = productHTML;
-
-function updateCart(productId, quantity) {
-
-  let matchingItem;
-    
-    cart.forEach( (item) => {
-
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += quantity;
-    } else {
-      cart.push({
-        productId,
-        quantity
-      });
-    };
-}
 
 function updateCartQuantity() {
 
