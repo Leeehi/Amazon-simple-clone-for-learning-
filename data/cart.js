@@ -15,6 +15,17 @@ function saveToLocal() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+export function calculateCartQuantity() {
+
+  let cartQuantity = 0;
+
+    cart.forEach( (item) => {
+      cartQuantity += item.quantity;
+    })
+
+    return cartQuantity;
+}
+
 export function updateCart(productId, quantity) {
 
   let matchingItem;
@@ -49,6 +60,28 @@ export function removeFromCart(productId) {
   })
 
   cart = newCart;
+
+  saveToLocal();
+}
+
+export function updateQuantity(productId, newQuantity) {
+
+  let matchingItem;
+
+  cart.forEach( (cartItem) => {
+
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  })
+
+  if (matchingItem) {
+    if (newQuantity > 0) {
+      matchingItem.quantity = newQuantity;
+    }
+  }
+
+  return matchingItem.quantity;
 
   saveToLocal();
 }
