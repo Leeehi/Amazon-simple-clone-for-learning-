@@ -54,3 +54,35 @@ export function deleteFunction(primaryId) {
   cart = newCart;
   saveToLocal();
 }
+
+export function calculateCartQuantity() {
+
+  let cartCount = 0;
+
+  cart.forEach( (cartItem) => {
+    cartCount += cartItem.quantity;
+  })
+
+  return cartCount;
+}
+
+export function updateQuantity(productId, newQuantity) {
+
+  let matchingItem;
+
+  cart.forEach( (cartItem) => {
+
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  })
+
+  if (newQuantity > 0 && newQuantity <= 1000) {
+    matchingItem.quantity = newQuantity;
+  } else {
+    window.alert(`You cant add that value`);
+    return;
+  }
+
+  saveToLocal();
+}
