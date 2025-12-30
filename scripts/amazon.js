@@ -1,3 +1,32 @@
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+import { isWeekend as satSun } from './util/days.js';
+
+const today = dayjs();
+const advanceDate = today.add(5, 'day');
+const dateString = advanceDate.format('MMMM D');
+
+const monthDate = today.subtract(1, 'month');
+const monthString = monthDate.format('dddd');
+
+console.log(dateString);
+console.log(monthString);
+
+let date = dayjs();
+console.log(date.format('dddd, MMMM D'));
+console.log(satSun(date));
+
+date = dayjs().add(2, 'day');
+console.log(date.format('dddd, MMMM D'));
+console.log(satSun(date));
+
+date = dayjs().add(4, 'day');
+console.log(date.format('dddd, MMMM D'));
+console.log(satSun(date));
+
+date = dayjs().add(6, 'day');
+console.log(date.format('dddd, MMMM D'));
+console.log(satSun(date));
+
 let productHTML = '';
 
 product.forEach( (products) => {
