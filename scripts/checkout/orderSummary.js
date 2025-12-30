@@ -4,6 +4,7 @@ import { priceDisplay } from '../util/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import { renderCheckout } from './renderCheckoutHeader.js';
 
 export function renderOrderSummary() {
 
@@ -111,10 +112,10 @@ export function renderOrderSummary() {
 
       let withS = cartQuantity > 1 ? "items": "item";
 
-      document.querySelector('.js-return-to-home').innerHTML = `${cartQuantity} ${withS}`;
+      // document.querySelector('.js-return-to-home').innerHTML = `${cartQuantity} ${withS}`;
   }
 
-  updateCartQuantity();
+  // updateCartQuantity();
 
   document.querySelectorAll(`.js-delete-link`).forEach ( (link) => {
 
@@ -131,6 +132,7 @@ export function renderOrderSummary() {
       updateCartQuantity();
       renderOrderSummary();
       renderPaymentSummary();
+      renderCheckout();
     })
   })
 
@@ -166,6 +168,7 @@ export function renderOrderSummary() {
 
       updateCartQuantity();
       renderPaymentSummary();
+      renderCheckout();
     })
 
     quantityInput.addEventListener('keydown', (event) => {
@@ -184,6 +187,7 @@ export function renderOrderSummary() {
 
         updateCartQuantity();
         renderPaymentSummary();
+        renderCheckout();
       }
     })
   })

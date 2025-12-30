@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart, calculateCartQuantity } from "../../data/cart.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { getItems } from "../../data/products.js";
 import { priceDisplay } from "../util/money.js";
@@ -25,7 +25,7 @@ export function renderPaymentSummary() {
         </div>
 
         <div class="payment-summary-row">
-          <div>Items (3):</div>
+          <div>${updateCartQuantity()}:</div>
           <div class="payment-summary-money">$${priceDisplay(productPriceCents)}</div>
         </div>
 
@@ -54,5 +54,14 @@ export function renderPaymentSummary() {
         </button>`;
 
   document.querySelector('.js-payment-summary').innerHTML = summaryDisplay;
+
+  function updateCartQuantity() {
+  
+      let cartQuantity = calculateCartQuantity();
+  
+        // let withS = cartQuantity > 1 ? "items": "item";
+  
+        return `Items (${cartQuantity})`;
+    }
 
 }
