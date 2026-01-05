@@ -14,16 +14,25 @@ export function getDeliveryOption(deliveryOptionId) {
   return deliveryOptionMatch || deliveryOptions[0];
 }
 
+function isWeekend(date) {
+  const daysOfWeek = date.format('dddd');
+  return daysOfWeek === 'Saturday' || daysOfWeek === 'Sunday';
+}
+
 export function calculateDeliveryDate(deliveryOptionMatch) {
 
-  const today = dayjs();
-  let deliveryDay = today.add(deliveryOptionMatch.deliveryDays, 'days');
+  let remainingDays =  deliveryOptionMatch.deliveryDays;
+  let deliveryDate = dayjs();
   
-  while (deliveryDay.format('dddd') === 'Saturday' || deliveryDay.format('dddd') === 'Sunday') {
-    deliveryDay = deliveryDay.subtract(1, 'days');
+  while (remainingDays > 0) {
+    deliveryDate = deliveryDate.add(1, 'days');
+
+    if(!isWeekend(deliveryDate)) {
+      remainingDays--;
+    }
   }
   
-  const dateString = deliveryDay.format('dddd, MMMM D');
+  const dateString = deliveryDate.format('dddd, MMMM D');
 
   return dateString;
 }
