@@ -1,4 +1,4 @@
-import { priceDisplay } from "../scripts/util/money.js";
+import { priceDisplay } from "../../scripts/util/money.js";
 
 console.log('Test suite: priceDisplay');
 
