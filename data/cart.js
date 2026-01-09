@@ -1,3 +1,5 @@
+import { deliveryOptions } from './deliveryOptions.js';
+
 export let cart;
 
 loadFromStorage();
@@ -99,7 +101,18 @@ export function updateQuantity(productId, newQuantity) {
 
 export function updateDeliveryOption(productId, productDeliveryId) {
   
-  let matchingItem;
+  let matchingItem, matchedId;
+
+  deliveryOptions.forEach( (option) => {
+    
+    if(productDeliveryId === option.id) {
+      matchedId = option.id
+    }
+  })
+
+  if(!matchedId) {
+    return;
+  }
 
   cart.forEach( (cartItem) => {
 
@@ -107,6 +120,10 @@ export function updateDeliveryOption(productId, productDeliveryId) {
       matchingItem = cartItem;
     }
   })
+
+  if(!matchingItem) {
+    return;
+  }
 
   matchingItem.deliveryOption = productDeliveryId;
 

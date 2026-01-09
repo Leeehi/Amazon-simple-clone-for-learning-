@@ -1,5 +1,6 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from '../../data/cart.js'
+import { priceDisplay } from "../../scripts/util/money.js";
 
 
 describe('test suite: renderOrderSummary', () => {
@@ -49,6 +50,14 @@ describe('test suite: renderOrderSummary', () => {
     expect(
       document.querySelector(`.product-quantity-${productId2}`).innerText
     ).toContain('Quantity: 1')
+
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText
+    ).toEqual('Black and Gray Athletic Cotton Socks - 6 Pairs')
+
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText
+    ).toEqual(`$${priceDisplay(1090)}`)
   })
 
   it('deletes a product', () => {
@@ -69,5 +78,30 @@ describe('test suite: renderOrderSummary', () => {
     expect(cart.length).toEqual(1);
 
     expect(cart[0].productId).toEqual(productId2);
+  })
+
+  it('updates the delivery option', () => {
+
+    document.querySelector(`.js-delivery-option-${productId1}-3`).click();
+
+    expect(
+      document.querySelector(`.js-delivery-option-inpit-${productId1}-3`)
+    ).checked;
+
+    expect(
+      document.querySelectorAll('.js-cart-item-container').length
+    ).toEqual(2);
+
+    expect(cart[0].productId).toEqual(productId1);
+
+    expect(cart[0].deliveryOption).toEqual('3')
+
+    expect(
+      document.querySelector(`.js-payment-summary-money`).innerText
+    ).toEqual('$14.98')
+
+    expect(
+      document.querySelector('.js-total-row').innerText
+    ).toContain('$63.50')
   })
 })

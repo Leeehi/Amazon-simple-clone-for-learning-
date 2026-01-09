@@ -11,5 +11,9 @@ describe('test suite: priceDisplay', () => {
 
   it('rounds the number', () => {
     expect(priceDisplay(2299.5)).toEqual('23.00');
+
+    expect(priceDisplay(2000.04)).toEqual('20.00');
+
+    expect(priceDisplay(-2000.04)).toEqual('-20.00');
   })
 });
