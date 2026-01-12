@@ -2,15 +2,15 @@ import { deliveryOptions } from './deliveryOptions.js';
 
 class Cart {
   cartItems;
-  localStorageKey;
+  #localStorageKey;
 
   constructor(localStorageKey) {
-    this.localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#localStorageKey = localStorageKey;
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey));
+  #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
     if (!this.cartItems) {
       this.cartItems = [{
@@ -139,7 +139,7 @@ class Cart {
 const cart = new Cart('cart');
 const businessCart = new Cart('business');
 
-businessCart.updateCart('77919bbe-0e56-475b-adde-4f24dfed3a04', 5);
+// businessCart.updateCart('77919bbe-0e56-475b-adde-4f24dfed3a04', 5);
 
 console.log(cart);
 console.log(businessCart);
