@@ -14,7 +14,7 @@ import { priceDisplay } from "../scripts/util/money.js";
     return matchingItem;
  }
 
- class Product {
+ export class Product {
   id;
   image;
   name;
@@ -42,7 +42,7 @@ import { priceDisplay } from "../scripts/util/money.js";
   }
  }
 
- class Clothing extends Product{
+ export class Clothing extends Product{
   sizeChartLink;
 
   constructor(productDetails) {
@@ -54,6 +54,24 @@ import { priceDisplay } from "../scripts/util/money.js";
     return `
       <a href="${this.sizeChartLink}" target="_blank">Size chart</a>
     `;
+  }
+ }
+
+ export class Appliance extends Product {
+  instructionLink;
+  warrantyLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.instructionLink = productDetails.instructionLink;
+    this.warrantyLink = productDetails.warrantyLink;
+  }
+
+  extraInfoHTML() {
+    return `
+      <a href="${this.instructionLink}" target="_blank">Instructions</a>
+      <a href="${this.warrantyLink}" target="_blank">Warranty</a>
+    `
   }
  }
  
@@ -113,6 +131,9 @@ import { priceDisplay } from "../scripts/util/money.js";
       count: 2197
     },
     priceCents: 1899,
+    type: "appliance",
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: [
       "toaster",
       "kitchen",
@@ -298,6 +319,9 @@ import { priceDisplay } from "../scripts/util/money.js";
       count: 846
     },
     priceCents: 3074,
+    type: "appliance",
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: [
       "water boiler",
       "appliances",
@@ -663,6 +687,9 @@ import { priceDisplay } from "../scripts/util/money.js";
       count: 3
     },
     priceCents: 10747,
+    type: "appliance",
+    instructionLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png",
     keywords: [
       "food blenders",
       "kitchen",
@@ -753,5 +780,10 @@ import { priceDisplay } from "../scripts/util/money.js";
   if (productDetails.type === 'clothing') {
     return new Clothing(productDetails)
   }
+
+  if (productDetails.type === 'appliance') {
+    return new Appliance(productDetails)
+  }
+
   return new Product(productDetails);
 });
