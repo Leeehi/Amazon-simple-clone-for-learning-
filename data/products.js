@@ -96,6 +96,10 @@ export function loadProducts(func) {
 
     console.log('load products');
 
+    // if (typeof func === 'function') {
+    //   func();   // ✅ only call if provided
+    // }
+
     func();
   })
   
@@ -103,7 +107,7 @@ export function loadProducts(func) {
   xhr.send();
  }
 
- loadProducts();
+//  loadProducts();
  
  /*
  export const product = [
