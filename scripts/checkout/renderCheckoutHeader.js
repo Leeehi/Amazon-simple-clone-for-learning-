@@ -1,8 +1,8 @@
-import { calculateCartQuantity } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 
 export function renderCheckout() {
 
-  let cartQuantity = calculateCartQuantity();
+  let cartQuantity = cart.calculateCartQuantity();
 
   let withS = cartQuantity > 1 ? "items": "item";
 

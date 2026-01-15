@@ -27,7 +27,7 @@ class Cart {
   }
 
   saveToLocal() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
   calculateCartQuantity() {
@@ -136,10 +136,10 @@ class Cart {
   }
 }
 
-const cart = new Cart('cart');
+export const cart = new Cart('cart');
 const businessCart = new Cart('business');
 
 // businessCart.updateCart('77919bbe-0e56-475b-adde-4f24dfed3a04', 5);
 
-console.log(cart);
-console.log(businessCart);
+// console.log(cart);
+// console.log(businessCart);

@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateCartQuantity, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
+import { cart } from '../../data/cart-class.js';
 import { product, getItems } from '../../data/products.js';
 import { priceDisplay } from '../util/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
@@ -10,7 +10,7 @@ export function renderOrderSummary() {
 
   let cartInnerHTML = '';
 
-  cart.forEach( (cartItem) => {
+  cart.cartItems.forEach( (cartItem) => {
 
     const matchingItem = getItems(cartItem.productId);
 
@@ -108,7 +108,7 @@ export function renderOrderSummary() {
 
   function updateCartQuantity() {
 
-    let cartQuantity = calculateCartQuantity();
+    let cartQuantity = cart.calculateCartQuantity();
 
       let withS = cartQuantity > 1 ? "items": "item";
 
@@ -123,7 +123,7 @@ export function renderOrderSummary() {
 
       let {productId} = link.dataset;
 
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
 
       // const product = document.querySelector(`.js-cart-item-${productId}`);
 
@@ -158,7 +158,7 @@ export function renderOrderSummary() {
 
       let newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value)
     
-      let updatedQuantity = updateQuantity(productId, newQuantity);
+      let updatedQuantity = cart.updateQuantity(productId, newQuantity);
 
       let displayer = document.querySelector(`.js-cart-item-${productId}`);
 
@@ -177,7 +177,7 @@ export function renderOrderSummary() {
 
         let newQuantity = Number(document.querySelector(`.js-quantity-input-${productId}`).value)
     
-        let updatedQuantity = updateQuantity(productId, newQuantity);
+        let updatedQuantity = cart.updateQuantity(productId, newQuantity);
 
         let displayer = document.querySelector(`.js-cart-item-${productId}`);
 
@@ -198,7 +198,7 @@ export function renderOrderSummary() {
 
       let { productId, deliveryOptionId } = link.dataset;
 
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     })
