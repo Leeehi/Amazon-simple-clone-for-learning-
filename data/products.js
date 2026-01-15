@@ -74,7 +74,38 @@ import { priceDisplay } from "../scripts/util/money.js";
     `
   }
  }
+
+export let product = [];
+
+export function loadProducts(func) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.addEventListener( 'load', () => {
+    product = JSON.parse(xhr.response).map( (productDetails) => {
+
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails)
+      }
+
+      if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails)
+      }
+
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+
+    func();
+  })
+  
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+ }
+
+ loadProducts();
  
+ /*
  export const product = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -787,3 +818,4 @@ import { priceDisplay } from "../scripts/util/money.js";
 
   return new Product(productDetails);
 });
+*/
