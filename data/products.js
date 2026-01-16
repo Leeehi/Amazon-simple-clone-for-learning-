@@ -77,6 +77,29 @@ import { priceDisplay } from "../scripts/util/money.js";
 
 export let product = [];
 
+export function loadProductsFetch() {
+  const promise = fetch('https://supersimplebackend.dev/products').then( (response) => {
+    return response.json();
+  }).then( (productData) => {
+    product = productData.map( (productDetails) => {
+
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails)
+      }
+
+      if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails)
+      }
+
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+  })
+
+  return promise;
+}
+
 export function loadProducts(func) {
   let xhr = new XMLHttpRequest();
 
