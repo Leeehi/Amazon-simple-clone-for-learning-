@@ -6,8 +6,24 @@ import { loadProducts } from '../data/products.js';
 // import { cars } from '../data/car.js';
 //import '../data/backend-practice.js'
 
+Promise.all([
+  new Promise( (resolve) => {
+    loadProducts( () => {
+      resolve('this is the 1st promise');
+    });
+  })
+
+]).then( (value) => {
+  console.log(value);
+  renderOrderSummary();
+  renderPaymentSummary();
+  renderCheckout();
+});
+
+/*
 loadProducts( () => {
   renderOrderSummary();
   renderPaymentSummary();
   renderCheckout();
 })
+*/
