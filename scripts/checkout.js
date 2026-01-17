@@ -6,6 +6,22 @@ import { loadProducts, loadProductsFetch } from '../data/products.js';
 // import { cars } from '../data/car.js';
 //import '../data/backend-practice.js'
 
+async function loadPage() {
+  try {
+    await loadProductsFetch();
+    
+  } catch (error) {
+    console.log('Unexpected error, try again later');
+  }
+
+  renderOrderSummary();
+  renderPaymentSummary();
+  renderCheckout();
+}
+
+loadPage();
+
+/*
 Promise.all([
   loadProductsFetch()
 ]).then( (value) => {
@@ -14,6 +30,7 @@ Promise.all([
   renderPaymentSummary();
   renderCheckout();
 });
+*/
 
 /*
 loadProducts( () => {
