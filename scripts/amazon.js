@@ -1,8 +1,15 @@
 import { cart } from '../data/cart-class.js';
-import { product, loadProducts } from '../data/products.js';
+import { product, loadProducts, loadProductsFetch } from '../data/products.js';
 import { priceDisplay } from './util/money.js';
 
-loadProducts(renderAmazon);
+// loadProducts(renderAmazon);
+async function loadPages() {
+  await loadProductsFetch();
+
+  renderAmazon();
+}
+
+loadPages();
 
 function renderAmazon() {
   let productHTML = '';
