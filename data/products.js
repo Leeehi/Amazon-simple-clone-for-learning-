@@ -852,3 +852,62 @@ export function loadProducts(func) {
   return new Product(productDetails);
 });
 */
+
+// //using the XMLHttpRequest to retrieve some data
+// export function loadGreetings() {
+//   let xhr = new XMLHttpRequest();
+
+//   xhr.addEventListener( 'load', () => {
+//     console.log(xhr.response);
+//   })
+
+//   xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+//   xhr.send();
+// }
+
+// loadGreetings();
+
+// //using promise but with fetch to retrieve some data
+// export function fetchGreetings() {
+//   fetch('https://supersimplebackend.dev/greeting').then( (response) => {
+//     return response.text();
+//   }).then( (text) => {
+//     console.log(text);
+//   })
+// }
+
+// fetchGreetings();
+
+// //this is for retrieving data using async/await
+// export async function fetchGreeting() {
+//   const promise = await fetch('https://supersimplebackend.dev/greeting');
+//   const response = await promise.text();
+//   console.log(response);
+// }
+
+// fetchGreeting();
+
+// //this is for sending and retrieving data using async/await
+// export async function fetchGreetingName() {
+//   try {
+//     const promise = await fetch('https://supersimplebackend.dev/greeting', {
+//     // const promise = await fetch('https://amazon.com', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({
+//       name: 'Lehi Galabo'
+//     })
+//   })
+
+//   const response = await promise.text();
+//   console.log(response);
+
+//   } catch (error) {
+//     console.log(error);
+//     // console.log('CORS error, your request was blocked by the backend');
+//   }
+// };
+
+// fetchGreetingName();
