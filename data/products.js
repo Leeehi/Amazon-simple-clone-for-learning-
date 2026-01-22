@@ -1,7 +1,6 @@
 import { priceDisplay } from "../scripts/util/money.js";
  
  export function getItems(productId) {
-
   let matchingItem;
 
     product.forEach( (products) => {
@@ -14,12 +13,30 @@ import { priceDisplay } from "../scripts/util/money.js";
     return matchingItem;
  }
 
+ export function filteredProducts(productName) {
+  let toReturn = []
+
+  product.forEach( (products) => {
+
+    const matchingItems = products.name.toLowerCase().includes(productName.toLowerCase());
+
+    const keywordMatch = products.keywords.some( (kw) => kw.toLowerCase().includes(productName.toLowerCase()))
+
+    if (matchingItems || keywordMatch) {
+      toReturn.push(products);
+    }
+  })
+
+  return toReturn;
+ }
+
  export class Product {
   id;
   image;
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -27,6 +44,7 @@ import { priceDisplay } from "../scripts/util/money.js";
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   getStarUrl() {

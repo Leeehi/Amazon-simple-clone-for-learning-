@@ -1,5 +1,5 @@
 import { cart } from '../data/cart-class.js';
-import { product, loadProducts, loadProductsFetch } from '../data/products.js';
+import { product, loadProducts, loadProductsFetch, filteredProducts } from '../data/products.js';
 import { priceDisplay } from './util/money.js';
 
 // loadProducts(renderAmazon);
@@ -14,7 +14,18 @@ loadPages();
 function renderAmazon() {
   let productHTML = '';
 
-  product.forEach( (products) => {
+  let toRenderProduct = product;
+
+  const url = new URL(window.location.href);
+  const searchTerm = url.searchParams.get('search');
+
+  if (searchTerm) {
+    toRenderProduct = filteredProducts(searchTerm);
+  }
+
+  // console.log(toRenderProduct.length);
+
+  toRenderProduct.forEach( (products) => {
     productHTML += `
       <div class="product-container">
             <div class="product-image-container">
@@ -70,6 +81,11 @@ function renderAmazon() {
     `;
   });
 
+  if (toRenderProduct.length === 0) {
+      productHTML = `<div class="no-results">No products found for "${searchTerm}"</div>`;
+      // console.log(`No products found for "${searchTerm}"`);
+    }
+
   document.querySelector('.js-products-grid').innerHTML = productHTML;
 
   function updateCartQuantity() {
@@ -104,4 +120,20 @@ function renderAmazon() {
       }, 2000);
     });
   });
+
+  document.querySelector('.js-search-button').addEventListener( 'click', () => {
+
+    const search = document.querySelector('.js-search-bar').value;
+
+    // window.location.href = `amazon.html?search=${search}`;
+    window.location.href = `amazon.html?search=${encodeURIComponent(search)}`;
+  });
+
+  document.querySelector('.js-search-bar').addEventListener('keypress', (event) => {
+  if (event.key === 'Enter') {
+      const search = event.target.value;
+      window.location.href = `amazon.html?search=${encodeURIComponent(search)}`;
+    }
+  });
+
 };
